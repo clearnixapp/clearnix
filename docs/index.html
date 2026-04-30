@@ -1,202 +1,1351 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clearnix Version 1.0 - Download</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clearnix</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
 
-        .container {
-            max-width: 600px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 50px 40px;
-            animation: fadeIn 0.5s ease-in;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+body{
+    font-family:'Segoe UI', 'Helvetica Neue', sans-serif;
+    background:#000;
+    color:white;
+    overflow-x:hidden;
+    position:relative;
+}
 
-        .logo {
-            font-size: 48px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+/* ANIMATED BACKGROUND */
+.animated-bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(-45deg, #000000, #0a0520, #0f0f2e, #000000);
+    background-size:400% 400%;
+    animation:gradient-shift 15s ease infinite;
+    z-index:-3;
+}
 
-        h1 {
-            color: #333;
-            font-size: 32px;
-            margin-bottom: 10px;
-            font-weight: 700;
-            text-align: center;
-        }
+@keyframes gradient-shift{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
 
-        .version {
-            color: #667eea;
-            font-size: 18px;
-            margin-bottom: 30px;
-            font-weight: 600;
-            text-align: center;
-        }
+.orb-container{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    overflow:hidden;
+}
 
-        .description {
-            color: #666;
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            text-align: center;
-        }
+.orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:0.4;
+    mix-blend-mode:screen;
+}
 
-        .features {
-            background: #f8f9ff;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border-left: 4px solid #667eea;
-        }
+.orb-purple{
+    width:400px;
+    height:400px;
+    background:radial-gradient(circle, #7c3aed, #6c63ff, transparent);
+    top:-100px;
+    left:-50px;
+    animation:orb-move-1 20s ease-in-out infinite;
+}
 
-        .features h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
+.orb-pink{
+    width:350px;
+    height:350px;
+    background:radial-gradient(circle, #ec4899, #ff006e, transparent);
+    bottom:-100px;
+    right:-50px;
+    animation:orb-move-2 25s ease-in-out infinite;
+}
 
-        .features ul {
-            list-style: none;
-        }
+.orb-cyan{
+    width:380px;
+    height:380px;
+    background:radial-gradient(circle, #06b6d4, #00d9ff, transparent);
+    top:30%;
+    right:-100px;
+    animation:orb-move-3 22s ease-in-out infinite;
+}
 
-        .features li {
-            color: #555;
-            padding: 8px 0;
-            display: flex;
-            align-items: center;
-        }
+.orb-violet{
+    width:320px;
+    height:320px;
+    background:radial-gradient(circle, #8b5cf6, #a78bfa, transparent);
+    bottom:15%;
+    left:10%;
+    animation:orb-move-4 23s ease-in-out infinite;
+}
 
-        .features li:before {
-            content: "✓";
-            color: #667eea;
-            font-weight: bold;
-            margin-right: 10px;
-            font-size: 18px;
-        }
+@keyframes orb-move-1{
+    0%{transform:translate(0px, 0px) scale(1);}
+    25%{transform:translate(100px, 50px) scale(1.1);}
+    50%{transform:translate(50px, 150px) scale(0.95);}
+    75%{transform:translate(-50px, 80px) scale(1.05);}
+    100%{transform:translate(0px, 0px) scale(1);}
+}
 
-        .download-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-            margin-bottom: 15px;
-        }
+@keyframes orb-move-2{
+    0%{transform:translate(0px, 0px) scale(1);}
+    25%{transform:translate(-80px, -100px) scale(1.05);}
+    50%{transform:translate(-120px, -50px) scale(0.9);}
+    75%{transform:translate(-40px, -80px) scale(1.1);}
+    100%{transform:translate(0px, 0px) scale(1);}
+}
 
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
-        }
+@keyframes orb-move-3{
+    0%{transform:translate(0px, 0px) scale(1);}
+    33%{transform:translate(-80px, 100px) scale(1.08);}
+    66%{transform:translate(60px, -100px) scale(0.95);}
+    100%{transform:translate(0px, 0px) scale(1);}
+}
 
-        .info {
-            text-align: center;
-            color: #999;
-            font-size: 13px;
-            margin-top: 20px;
-        }
+@keyframes orb-move-4{
+    0%{transform:translate(0px, 0px) scale(1);}
+    25%{transform:translate(100px, -80px) scale(0.98);}
+    50%{transform:translate(-60px, -120px) scale(1.1);}
+    75%{transform:translate(80px, -40px) scale(1);}
+    100%{transform:translate(0px, 0px) scale(1);}
+}
 
-        .support-corner {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #ff6b6b;
-            color: white;
-            padding: 12px 18px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            font-size: 14px;
-        }
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 4s infinite;
+}
 
-        .support-corner:hover {
-            background: #ff5252;
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
-        }
+@keyframes twinkle{
+    0%, 100%{opacity:0.3;}
+    50%{opacity:1;}
+}
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 30px 20px;
-            }
-            h1 {
-                font-size: 26px;
-            }
-            .logo {
-                font-size: 36px;
-            }
-            .support-corner {
-                bottom: 20px;
-                right: 20px;
-                padding: 10px 15px;
-                font-size: 12px;
-            }
-        }
-    </style>
+/* NAV */
+.nav{
+    position:fixed;
+    width:100%;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(0,0,0,0.5);
+    backdrop-filter:blur(30px);
+    z-index:100;
+    border-bottom:1px solid rgba(124,58,237,0.3);
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+}
+
+.logo{
+    font-weight:900;
+    font-size:24px;
+    background:linear-gradient(135deg, #7c3aed, #ec4899, #06b6d4);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    letter-spacing:2px;
+    cursor:pointer;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:40px;
+}
+
+.nav-right a{
+    color:#cbd5e1;
+    text-decoration:none;
+    transition:all 0.3s ease;
+    position:relative;
+    font-weight:600;
+    font-size:15px;
+}
+
+.nav-right a:hover{
+    color:#7c3aed;
+}
+
+.nav-right a::after{
+    content:'';
+    position:absolute;
+    bottom:-8px;
+    left:0;
+    width:0;
+    height:2px;
+    background:linear-gradient(90deg, #7c3aed, #ec4899);
+    transition:width 0.3s ease;
+}
+
+.nav-right a:hover::after{
+    width:100%;
+}
+
+.lang select{
+    background:rgba(30,30,50,0.8);
+    color:white;
+    border:1.5px solid rgba(124,58,237,0.5);
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    font-weight:600;
+}
+
+.lang select:hover{
+    border-color:#7c3aed;
+    background:rgba(124,58,237,0.2);
+}
+
+/* PAGES */
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+/* HERO */
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    padding-top:100px;
+}
+
+.hero::before{
+    content:'';
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:800px;
+    height:800px;
+    background:radial-gradient(circle, rgba(124,58,237,0.15), transparent);
+    filter:blur(80px);
+    animation:pulse-big 6s ease-in-out infinite;
+    pointer-events:none;
+}
+
+@keyframes pulse-big{
+    0%,100%{transform:translate(-50%, -50%) scale(1);}
+    50%{transform:translate(-50%, -50%) scale(1.3);}
+}
+
+.hero-content{
+    z-index:5;
+    max-width:900px;
+    animation:slide-up 0.8s ease-out 0.2s both;
+}
+
+@keyframes slide-up{
+    from{
+        opacity:0;
+        transform:translateY(60px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.hero h1{
+    font-size:70px;
+    font-weight:900;
+    line-height:1.15;
+    margin-bottom:20px;
+    background:linear-gradient(135deg, #ffffff 0%, #7c3aed 50%, #ec4899 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    letter-spacing:-1px;
+}
+
+.hero p{
+    margin-top:20px;
+    color:#a0aec0;
+    font-size:20px;
+    letter-spacing:0.5px;
+    font-weight:500;
+}
+
+.download-btn, .back-btn, .review-btn, .delete-btn, .google-btn{
+    margin-top:50px;
+    padding:20px 50px;
+    border-radius:50px;
+    border:2px solid #7c3aed;
+    background:rgba(124,58,237,0.1);
+    color:white;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:700;
+    transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position:relative;
+    overflow:hidden;
+    letter-spacing:0.5px;
+}
+
+.download-btn::before, .back-btn::before, .review-btn::before, .delete-btn::before, .google-btn::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(90deg, #7c3aed, #ec4899);
+    transition:left 0.4s ease;
+    z-index:-1;
+}
+
+.download-btn:hover::before, .back-btn:hover::before, .review-btn:hover::before, .delete-btn:hover::before, .google-btn:hover::before{
+    left:0;
+}
+
+.download-btn:hover, .back-btn:hover, .review-btn:hover, .delete-btn:hover, .google-btn:hover{
+    border-color:#ec4899;
+    box-shadow:0 0 50px rgba(124,58,237,0.6), 0 0 25px rgba(236,72,153,0.4);
+    transform:translateY(-5px) scale(1.05);
+}
+
+.download-btn:active, .back-btn:active, .review-btn:active, .delete-btn:active, .google-btn:active{
+    transform:translateY(-2px) scale(1.02);
+}
+
+.back-btn{
+    margin-top:30px;
+    margin-right:20px;
+    border-color:#06b6d4;
+}
+
+.back-btn::before{
+    background:linear-gradient(90deg, #06b6d4, #7c3aed);
+}
+
+.back-btn:hover{
+    border-color:#7c3aed;
+}
+
+.delete-btn{
+    margin-top:10px;
+    padding:10px 20px;
+    font-size:14px;
+    border-color:#ef4444;
+    background:rgba(239,68,68,0.1);
+}
+
+.delete-btn::before{
+    background:linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.delete-btn:hover{
+    border-color:#dc2626;
+    box-shadow:0 0 30px rgba(239,68,68,0.4);
+}
+
+#download-status{
+    margin-top:25px;
+    color:#7c3aed;
+    font-size:16px;
+    min-height:24px;
+    font-weight:600;
+    animation:fade-in 0.5s ease;
+}
+
+@keyframes fade-in{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+/* FEATURE PAGE */
+.feature-page{
+    min-height:100vh;
+    padding:120px 40px;
+    text-align:center;
+}
+
+.feature-page h1{
+    font-size:55px;
+    margin-bottom:30px;
+    background:linear-gradient(135deg, #ffffff 0%, #7c3aed 50%, #ec4899 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    font-weight:900;
+}
+
+.feature-page p{
+    font-size:20px;
+    color:#a0aec0;
+    max-width:800px;
+    margin:0 auto 40px;
+    line-height:1.8;
+}
+
+.feature-details{
+    background:rgba(30,30,50,0.4);
+    border:2px solid rgba(124,58,237,0.3);
+    border-radius:25px;
+    padding:50px;
+    max-width:800px;
+    margin:40px auto;
+    backdrop-filter:blur(20px);
+}
+
+.feature-details li{
+    text-align:left;
+    margin:20px 0;
+    color:#cbd5e1;
+    font-size:18px;
+}
+
+.feature-details li::before{
+    content:'✓ ';
+    color:#7c3aed;
+    font-weight:900;
+    margin-right:10px;
+}
+
+/* REVIEWS SECTION */
+.reviews-section{
+    padding:120px 20px;
+    position:relative;
+    z-index:5;
+}
+
+.reviews-section h2{
+    font-size:55px;
+    margin-bottom:80px;
+    font-weight:900;
+    background:linear-gradient(135deg, #ffffff 0%, #7c3aed 50%, #ec4899 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    text-align:center;
+}
+
+.reviews-container{
+    max-width:1000px;
+    margin:0 auto;
+}
+
+.review-card{
+    background:rgba(30,30,50,0.4);
+    border:2px solid rgba(124,58,237,0.3);
+    border-radius:20px;
+    padding:30px;
+    margin-bottom:30px;
+    backdrop-filter:blur(20px);
+    transition:all 0.3s ease;
+}
+
+.review-card:hover{
+    border-color:#7c3aed;
+    transform:translateX(10px);
+}
+
+.review-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.review-author{
+    font-weight:700;
+    color:#7c3aed;
+}
+
+.review-date{
+    color:#64748b;
+    font-size:14px;
+}
+
+.review-rating{
+    color:#fbbf24;
+    margin-bottom:10px;
+    font-size:16px;
+}
+
+.review-text{
+    color:#cbd5e1;
+    line-height:1.6;
+    margin-bottom:15px;
+}
+
+.review-actions{
+    display:flex;
+    gap:10px;
+}
+
+.delete-btn{
+    margin:0;
+    padding:8px 16px;
+    font-size:13px;
+}
+
+/* REVIEW FORM */
+.review-form-container{
+    max-width:600px;
+    margin:40px auto;
+    background:rgba(30,30,50,0.4);
+    border:2px solid rgba(124,58,237,0.3);
+    border-radius:20px;
+    padding:40px;
+    backdrop-filter:blur(20px);
+}
+
+.review-form-container h3{
+    font-size:24px;
+    margin-bottom:30px;
+    color:#fff;
+    font-weight:700;
+}
+
+.form-group{
+    margin-bottom:25px;
+    text-align:left;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:10px;
+    color:#cbd5e1;
+    font-weight:600;
+}
+
+.form-group input, .form-group textarea, .form-group select{
+    width:100%;
+    padding:12px;
+    background:rgba(17,17,17,0.8);
+    border:2px solid rgba(124,58,237,0.3);
+    border-radius:10px;
+    color:white;
+    font-family:inherit;
+    transition:all 0.3s ease;
+}
+
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus{
+    outline:none;
+    border-color:#7c3aed;
+    box-shadow:0 0 20px rgba(124,58,237,0.3);
+}
+
+.form-group textarea{
+    resize:vertical;
+    min-height:120px;
+}
+
+.google-btn{
+    width:100%;
+    margin-top:20px;
+    background:white;
+    color:#000;
+    border-color:white;
+}
+
+.google-btn::before{
+    background:linear-gradient(90deg, #f3f4f6, #e5e7eb);
+}
+
+.google-btn:hover{
+    background:rgba(243,244,246,0.9);
+}
+
+.submit-review-btn{
+    width:100%;
+    margin-top:0;
+}
+
+/* SECTION */
+.section{
+    padding:120px 20px;
+    text-align:center;
+    position:relative;
+    z-index:5;
+}
+
+.section h2{
+    font-size:55px;
+    margin-bottom:80px;
+    font-weight:900;
+    background:linear-gradient(135deg, #ffffff 0%, #7c3aed 50%, #ec4899 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    letter-spacing:-1px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:40px;
+    max-width:1100px;
+    margin:auto;
+}
+
+.card{
+    background:rgba(30,30,50,0.4);
+    padding:50px 30px;
+    border-radius:25px;
+    border:2px solid rgba(124,58,237,0.3);
+    backdrop-filter:blur(20px);
+    transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg, rgba(124,58,237,0.2), rgba(236,72,153,0.1));
+    transition:left 0.4s ease;
+    z-index:0;
+}
+
+.card::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:25px;
+    padding:2px;
+    background:linear-gradient(135deg, #7c3aed, #ec4899, transparent);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    opacity:0;
+    transition:opacity 0.4s ease;
+    pointer-events:none;
+}
+
+.card:hover::before{
+    left:0;
+}
+
+.card:hover::after{
+    opacity:1;
+}
+
+.card:hover{
+    border-color:#7c3aed;
+    transform:translateY(-15px);
+    box-shadow:0 30px 60px rgba(124,58,237,0.2), inset 0 0 30px rgba(124,58,237,0.1);
+}
+
+.card-content{
+    font-size:22px;
+    font-weight:700;
+    position:relative;
+    z-index:1;
+}
+
+/* SUPPORT */
+.support{
+    text-align:center;
+    padding:100px 20px;
+    position:relative;
+    z-index:5;
+}
+
+.support h3{
+    font-size:48px;
+    margin-bottom:40px;
+    font-weight:900;
+    background:linear-gradient(135deg, #ffffff 0%, #7c3aed 50%, #ec4899 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    letter-spacing:-1px;
+}
+
+.support a{
+    display:inline-block;
+    background:linear-gradient(135deg, #ec4899, #7c3aed);
+    padding:18px 45px;
+    border-radius:50px;
+    color:white;
+    text-decoration:none;
+    font-weight:700;
+    transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border:2px solid transparent;
+    box-shadow:0 10px 30px rgba(236,72,153,0.3);
+    letter-spacing:0.5px;
+}
+
+.support a:hover{
+    transform:translateY(-7px);
+    box-shadow:0 20px 50px rgba(236,72,153,0.5), 0 0 40px rgba(124,58,237,0.3);
+}
+
+.support a:active{
+    transform:translateY(-3px);
+}
+
+.admin-section{
+    margin-top:40px;
+    padding:30px;
+    background:rgba(30,30,50,0.4);
+    border:2px solid rgba(239,68,68,0.3);
+    border-radius:15px;
+    display:none;
+}
+
+.admin-section.show{
+    display:block;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .hero h1{font-size:45px;}
+    .section h2{font-size:35px;}
+    .nav{padding:15px 20px;}
+    .nav-right{gap:20px;}
+    .grid{grid-template-columns:1fr;}
+    .card{padding:40px 20px;}
+    .download-btn{padding:16px 40px;font-size:16px;}
+    .hero{padding-top:80px;}
+    .feature-page{padding:100px 20px;}
+    .back-btn{display:block;margin-bottom:20px;}
+}
+
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="logo">📦</div>
-        <h1>Clearnix</h1>
-        <div class="version">Version 1.0</div>
-        <p class="description">Your professional application for Windows. Fast, reliable, and easy to use.</p>
 
-        <div class="features">
-            <h3>✨ Features</h3>
-            <ul>
-                <li>Lightning fast performance</li>
-                <li>User-friendly interface</li>
-                <li>Automatic update checking</li>
-                <li>Secure and optimized</li>
-            </ul>
-        </div>
+<div class="animated-bg"></div>
+<div class="orb-container">
+    <div class="orb orb-purple"></div>
+    <div class="orb orb-pink"></div>
+    <div class="orb orb-cyan"></div>
+    <div class="orb orb-violet"></div>
+</div>
 
-        <button class="download-btn" onclick="downloadApp()">📥 Download Now</button>
+<div class="nav">
+    <div class="logo" onclick="goToHome()">⚡ Clearnix</div>
 
-        <div class="info">
-            <p>🔄 Automatic updates available | 💻 Windows only</p>
+    <div class="nav-right">
+        <a href="#" onclick="goToHome(); return false;" id="nav-home">Home</a>
+        <a href="#" onclick="goToReviews(); return false;" id="nav-reviews">Reviews</a>
+
+        <div class="lang">
+            <select onchange="changeLang(this.value)">
+                <option value="pl">🇵🇱 PL</option>
+                <option value="en">🇬🇧 EN</option>
+                <option value="de">🇩🇪 DE</option>
+                <option value="ru">🇷🇺 RU</option>
+                <option value="ua">🇺🇦 UA</option>
+                <option value="es">🇪🇸 ES</option>
+            </select>
         </div>
     </div>
+</div>
 
-    <a href="https://tipply.pl/@anarchiczny_2" target="_blank" class="support-corner">💝 Wspomóż nas</a>
+<!-- HOME PAGE -->
+<div id="home-page" class="page active">
+    <section class="hero">
+        <div class="hero-content">
+            <h1 id="title">Optymalizuj Windows jak profesjonalista</h1>
+            <p id="desc">Zwiększ FPS, usuń lagi i przyspiesz system.</p>
 
-    <script>
-        function downloadApp() {
-            alert('Download link coming soon! Application is still in development.');
+            <button class="download-btn" onclick="startDownload()" id="download-btn">
+                ⬇ Pobierz
+            </button>
+
+            <div id="download-status"></div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="how">
+        <h2 id="how-title">Jak to działa</h2>
+
+        <div class="grid">
+            <div class="card" onclick="goToFeature('cleaning')">
+                <div class="card-content" id="c1">⚡ Optymalizuje komputer</div>
+            </div>
+            <div class="card" onclick="goToFeature('internet')">
+                <div class="card-content" id="c2">🌐 Optymalizuje internet</div>
+            </div>
+            <div class="card" onclick="goToFeature('cache')">
+                <div class="card-content" id="c3">🧹 Czyści niepotrzebne pliki</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <div class="reviews-section" id="reviews-main">
+        <h2 id="reviews-title">Opinie użytkowników</h2>
+        <div class="reviews-container" id="reviews-list"></div>
+        <button class="review-btn" onclick="goToReviews()" id="add-review-btn">💬 Dodaj opinię</button>
+    </div>
+
+    <!-- SUPPORT -->
+    <div class="support">
+        <h3 id="support-text">Wesprzyj nas</h3>
+        <a href="https://tipply.pl/@anarchiczny_2" target="_blank">💝 Tipply</a>
+    </div>
+</div>
+
+<!-- FEATURE PAGE -->
+<div id="feature-page" class="page">
+    <div class="feature-page">
+        <button class="back-btn" onclick="goToHome()" id="back-home">← Wróć</button>
+        
+        <h1 id="feature-title">Czyszczenie systemu</h1>
+        <p id="feature-description">Aplikacja czysci nie potrzebne pliki systemowe i przegladarkowe takie jak pliki cache</p>
+        
+        <div class="feature-details">
+            <ul id="feature-list">
+                <li>Usuwanie plików cache</li>
+                <li>Czyszczenie pamięci tymczasowej</li>
+                <li>Optymalizacja systemu plików</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- REVIEWS PAGE -->
+<div id="reviews-page" class="page">
+    <div style="min-height:100vh;padding-top:120px;">
+        <button class="back-btn" onclick="goToHome()" id="back-reviews">← Wróć</button>
+        
+        <h2 id="reviews-page-title" style="font-size:45px;margin-bottom:50px;background:linear-gradient(135deg, #ffffff 0%, #7c3aed 50%, #ec4899 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Dodaj opinię</h2>
+
+        <!-- LOGIN FORM -->
+        <div id="login-section" class="review-form-container">
+            <h3 id="login-title">Zaloguj się aby dodać opinię</h3>
+            <button class="google-btn" onclick="loginWithGoogle()" id="google-login-btn">
+                🔐 Zaloguj się przez Google
+            </button>
+        </div>
+
+        <!-- REVIEW FORM (hidden until login) -->
+        <div id="review-form-section" class="review-form-container" style="display:none;">
+            <div style="margin-bottom:20px;padding:15px;background:rgba(124,58,237,0.2);border-radius:10px;">
+                <p id="logged-user" style="color:#cbd5e1;"></p>
+                <button onclick="logout()" style="background:#ef4444;color:white;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;">Wyloguj</button>
+            </div>
+            
+            <form onsubmit="submitReview(event)">
+                <div class="form-group">
+                    <label id="rating-label">Ocena:</label>
+                    <select id="rating" required>
+                        <option value="">Wybierz ocenę</option>
+                        <option value="5">⭐⭐⭐⭐⭐ - Świetnie!</option>
+                        <option value="4">⭐⭐⭐⭐ - Dobrze</option>
+                        <option value="3">⭐⭐⭐ - OK</option>
+                        <option value="2">⭐⭐ - Źle</option>
+                        <option value="1">⭐ - Bardzo źle</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label id="opinion-label">Twoja opinia:</label>
+                    <textarea id="opinion" placeholder="Napisz co myślisz o aplikacji..." required maxlength="500"></textarea>
+                    <small id="char-count" style="color:#64748b;display:block;margin-top:5px;">0/500</small>
+                </div>
+
+                <button type="submit" class="review-btn submit-review-btn" id="submit-btn">Wyślij opinię</button>
+            </form>
+        </div>
+
+        <!-- ALL REVIEWS -->
+        <div style="margin-top:60px;max-width:900px;margin-left:auto;margin-right:auto;">
+            <h3 id="all-reviews-title" style="font-size:32px;margin-bottom:40px;text-align:center;color:#cbd5e1;">Wszystkie opinie</h3>
+            <div id="all-reviews-list"></div>
+        </div>
+
+        <!-- ADMIN SECTION -->
+        <div id="admin-section" class="admin-section">
+            <h3>Panel Administratora</h3>
+            <p id="admin-info"></p>
+            <button onclick="showAllReviewsAdmin()" style="background:#ef4444;color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:600;margin-top:10px;">Zarządzaj opiniami</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://accounts.google.com/gsi/client"></script>
+
+<script>
+
+let currentUser=null;
+let userEmail=null;
+const ADMIN_EMAIL='clearnixapp@gmail.com'; // Zmień na twój email administratora
+
+// STARS EFFECT
+function createStars(){
+    const starsContainer=document.querySelector('.orb-container');
+    for(let i=0;i<50;i++){
+        const star=document.createElement('div');
+        star.className='star';
+        star.style.width=Math.random()*2+1+'px';
+        star.style.height=star.style.width;
+        star.style.left=Math.random()*100+'%';
+        star.style.top=Math.random()*100+'%';
+        star.style.animationDelay=Math.random()*4+'s';
+        starsContainer.appendChild(star);
+    }
+}
+createStars();
+
+// INIT GOOGLE AUTH
+function initializeGoogleAuth(){
+    google.accounts.id.initialize({
+        client_id:'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com', // Zmień na swój Google Client ID
+        callback:handleCredentialResponse,
+        auto_select:false
+    });
+}
+
+function handleCredentialResponse(response){
+    try{
+        const decoded=jwt_decode(response.credential);
+        currentUser=decoded.name;
+        userEmail=decoded.email;
+        showReviewForm();
+        loadReviews();
+    }catch(err){
+        alert('Błąd autoryzacji. Spróbuj ponownie.');
+    }
+}
+
+function jwt_decode(token){
+    const base64Url=token.split('.')[1];
+    const base64=base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload=decodeURIComponent(atob(base64).split('').map(c=>{
+        return '%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
+
+function loginWithGoogle(){
+    google.accounts.id.renderButton(
+        document.querySelector('.google-btn'),
+        {theme:'outline',size:'large'}
+    );
+    document.querySelector('.google-btn').click();
+}
+
+// Alternatywnie bez Google (localStоrage)
+function loginWithEmail(){
+    const email=prompt('Podaj email:');
+    if(!email) return;
+    
+    // Sprawdzamy czy ten email już pisał opinię
+    const reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
+    if(reviews.some(r=>r.email===email)){
+        alert('Już dodałeś opinię z tego emaila!');
+        return;
+    }
+    
+    currentUser=email.split('@')[0];
+    userEmail=email;
+    showReviewForm();
+}
+
+function showReviewForm(){
+    document.getElementById('login-section').style.display='none';
+    document.getElementById('review-form-section').style.display='block';
+    document.getElementById('logged-user').innerText=`Zalogowany jako: ${currentUser} (${userEmail})`;
+    
+    // Jeśli admin, pokaż panel
+    if(userEmail===ADMIN_EMAIL){
+        document.getElementById('admin-section').classList.add('show');
+    }
+}
+
+function logout(){
+    currentUser=null;
+    userEmail=null;
+    document.getElementById('login-section').style.display='block';
+    document.getElementById('review-form-section').style.display='none';
+    document.getElementById('admin-section').classList.remove('show');
+}
+
+function submitReview(e){
+    e.preventDefault();
+    
+    if(!currentUser || !userEmail){
+        alert('Musisz się zalogować!');
+        return;
+    }
+    
+    const rating=document.getElementById('rating').value;
+    const opinion=document.getElementById('opinion').value;
+    
+    if(!rating || !opinion){
+        alert('Wypełnij wszystkie pola!');
+        return;
+    }
+    
+    // Sprawdzamy czy użytkownik już pisał opinię
+    const reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
+    if(reviews.some(r=>r.email===userEmail)){
+        alert('Już dodałeś opinię! Każdy użytkownik może dodać max. 1 opinię.');
+        return;
+    }
+    
+    const review={
+        id:Date.now(),
+        author:currentUser,
+        email:userEmail,
+        rating:parseInt(rating),
+        text:opinion,
+        date:new Date().toLocaleDateString('pl-PL'),
+        approved:true // Automatyczne zatwierdzenie, ale admin może usuwać
+    };
+    
+    reviews.push(review);
+    localStorage.setItem('reviews',JSON.stringify(reviews));
+    
+    alert('Dziękuję za opinię!');
+    document.getElementById('rating').value='';
+    document.getElementById('opinion').value='';
+    document.getElementById('char-count').innerText='0/500';
+    
+    loadReviews();
+}
+
+function loadReviews(){
+    const reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
+    const isAdmin=userEmail===ADMIN_EMAIL;
+    
+    let html='';
+    reviews.forEach(review=>{
+        const stars='⭐'.repeat(review.rating);
+        html+=`
+            <div class="review-card">
+                <div class="review-header">
+                    <div>
+                        <div class="review-author">${review.author}</div>
+                        <div class="review-date">${review.date}</div>
+                    </div>
+                    ${isAdmin?`<button class="delete-btn" onclick="deleteReview(${review.id})">Usuń</button>`:''}
+                </div>
+                <div class="review-rating">${stars}</div>
+                <div class="review-text">${review.text}</div>
+            </div>
+        `;
+    });
+    
+    document.getElementById('all-reviews-list').innerHTML=html||'<p style="color:#64748b;">Brak opinii. Bądź pierwszy!</p>';
+    document.getElementById('reviews-list').innerHTML=html.slice(0,html.lastIndexOf('<div')||0)+'</div>';
+}
+
+function deleteReview(id){
+    if(userEmail!==ADMIN_EMAIL){
+        alert('Nie masz dostępu!');
+        return;
+    }
+    
+    if(!confirm('Usunąć tę opinię?')) return;
+    
+    let reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
+    reviews=reviews.filter(r=>r.id!==id);
+    localStorage.setItem('reviews',JSON.stringify(reviews));
+    loadReviews();
+}
+
+function showAllReviewsAdmin(){
+    alert('Panel admina - zarządzaj opiniami z listy powyżej (przycisk Usuń)');
+}
+
+// POBIERANIE
+function startDownload(){
+    let btn=document.getElementById("download-btn");
+    let status=document.getElementById("download-status");
+    
+    btn.disabled=true;
+    status.innerText="⬇ Pobieranie...";
+    
+    let progress=0;
+    let interval=setInterval(()=>{
+        progress+=Math.random()*30;
+        if(progress>90) progress=90;
+        status.innerText=`⬇ Pobieranie... ${Math.floor(progress)}%`;
+    }, 300);
+    
+    setTimeout(()=>{
+        clearInterval(interval);
+        
+        const link=document.createElement('a');
+        link.href='/clearnix.exe';
+        link.download='Clearnix.exe';
+        
+        fetch(link.href, {method:'HEAD'})
+            .then(response=>{
+                if(response.ok){
+                    link.click();
+                    status.innerText="✅ Pobieranie ukończone! Plik zapisany.";
+                } else {
+                    status.innerText="⚠️ Plik niedostępny. Spróbuj później.";
+                    btn.disabled=false;
+                }
+            })
+            .catch(()=>{
+                link.click();
+                status.innerText="✅ Pobieranie ukończone! Plik zapisany.";
+            });
+        
+        setTimeout(()=>{
+            btn.disabled=false;
+        }, 3000);
+    }, 3000+Math.random()*2000);
+}
+
+// NAVIGATION
+function goToHome(){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('home-page').classList.add('active');
+    loadReviews();
+    window.scrollTo(0,0);
+}
+
+function goToReviews(){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('reviews-page').classList.add('active');
+    loadReviews();
+    window.scrollTo(0,0);
+}
+
+function goToFeature(type){
+    const features={
+        cleaning:{
+            title:'Optymalizacja komputera',
+            desc:'Aplikacja optymalizuje działanie Twojego komputera poprzez czyszczenie niepotrzebnych procesów i optymalizację zasobów systemowych.',
+            items:['Zamykanie niepotrzebnych procesów w tle','Optymalizacja pamięci RAM','Czyszczenie rejestru systemu','Przyspieszenie rozruchu systemu']
+        },
+        internet:{
+            title:'Optymalizacja internetu',
+            desc:'Zwiększa szybkość połączenia internetowego poprzez optymalizację ustawień sieciowych i usuwanie bloatware\'u.',
+            items:['Optymalizacja DNS','Przyspieszenie transferu danych','Usunięcie balastowych aplikacji','Zmniejszenie opóźnień (ping)']
+        },
+        cache:{
+            title:'Czyszczenie plików',
+            desc:'Aplikacja czyści nie potrzebne pliki systemowe i przegladarkowe takie jak pliki cache, cookies i pliki tymczasowe.',
+            items:['Usuwanie plików cache','Czyszczenie cookies','Usunięcie plików tymczasowych','Odzyskanie miejsca na dysku']
         }
-    </script>
+    };
+    
+    const feature=features[type];
+    document.getElementById('feature-title').innerText=feature.title;
+    document.getElementById('feature-description').innerText=feature.desc;
+    
+    let itemsHtml='';
+    feature.items.forEach(item=>{
+        itemsHtml+=`<li>${item}</li>`;
+    });
+    document.getElementById('feature-list').innerHTML=itemsHtml;
+    
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('feature-page').classList.add('active');
+    window.scrollTo(0,0);
+}
+
+// TRANSLATIONS
+const translations={
+pl:{
+title:"Optymalizuj Windows jak profesjonalista",
+desc:"Zwiększ FPS, usuń lagi i przyspiesz system.",
+download:"⬇ Pobierz",
+how:"Jak to działa",
+c1:"⚡ Optymalizuje komputer",
+c2:"🌐 Optymalizuje internet",
+c3:"🧹 Czyści niepotrzebne pliki",
+support:"Wesprzyj nas",
+'reviews-title':"Opinie użytkowników",
+'add-review':"💬 Dodaj opinię",
+'nav-home':"Home",
+'nav-reviews':"Opinie",
+'back-home':"← Wróć",
+'login-title':"Zaloguj się aby dodać opinię",
+'google-login':"🔐 Zaloguj się przez Google",
+'rating-label':"Ocena:",
+'opinion-label':"Twoja opinia:",
+'submit-btn':"Wyślij opinię",
+'reviews-page-title':"Dodaj opinię",
+'all-reviews-title':"Wszystkie opinie",
+'logged-user':"Zalogowany jako:"
+},
+en:{
+title:"Optimize your Windows like a pro",
+desc:"Boost FPS, remove lag and speed up your system.",
+download:"⬇ Download",
+how:"How it works",
+c1:"⚡ Optimizes your PC",
+c2:"🌐 Optimizes internet",
+c3:"🧹 Cleans unnecessary files",
+support:"Support us",
+'reviews-title':"User Reviews",
+'add-review':"💬 Add Review",
+'nav-home':"Home",
+'nav-reviews':"Reviews",
+'back-home':"← Back",
+'login-title':"Sign in to add a review",
+'google-login':"🔐 Sign in with Google",
+'rating-label':"Rating:",
+'opinion-label':"Your opinion:",
+'submit-btn':"Submit Review",
+'reviews-page-title':"Add a Review",
+'all-reviews-title':"All Reviews",
+'logged-user':"Logged in as:"
+},
+de:{
+title:"Optimieren Sie Windows wie ein Profi",
+desc:"Erhöhen Sie die FPS, reduzieren Sie Verzögerungen und beschleunigen Sie Ihr System.",
+download:"⬇ Herunterladen",
+how:"So funktioniert es",
+c1:"⚡ Optimiert Ihren PC",
+c2:"🌐 Optimiert das Internet",
+c3:"🧹 Löscht unnötige Dateien",
+support:"Unterstützen Sie uns",
+'reviews-title':"Benutzerbewertungen",
+'add-review':"💬 Bewertung hinzufügen",
+'nav-home':"Startseite",
+'nav-reviews':"Bewertungen",
+'back-home':"← Zurück",
+'login-title':"Melden Sie sich an, um eine Bewertung abzugeben",
+'google-login':"🔐 Mit Google anmelden",
+'rating-label':"Bewertung:",
+'opinion-label':"Deine Meinung:",
+'submit-btn':"Bewertung einreichen",
+'reviews-page-title':"Bewertung abgeben",
+'all-reviews-title':"Alle Bewertungen",
+'logged-user':"Angemeldet als:"
+},
+ru:{
+title:"Оптимизируй Windows как профи",
+desc:"Увеличь FPS и ускорь систему.",
+download:"⬇ Скачать",
+how:"Как это работает",
+c1:"⚡ Оптимизация ПК",
+c2:"🌐 Оптимизация интернета",
+c3:"🧹 Очистка файлов",
+support:"Поддержать",
+'reviews-title':"Отзывы пользователей",
+'add-review':"💬 Добавить отзыв",
+'nav-home':"Главная",
+'nav-reviews':"Отзывы",
+'back-home':"← Назад",
+'login-title':"Войдите, чтобы добавить отзыв",
+'google-login':"🔐 Войти через Google",
+'rating-label':"Оценка:",
+'opinion-label':"Ваше мнение:",
+'submit-btn':"Отправить отзыв",
+'reviews-page-title':"Добавить отзыв",
+'all-reviews-title':"Все отзывы",
+'logged-user':"Авторизован как:"
+},
+ua:{
+title:"Оптимізуй Windows як профі",
+desc:"Збільш FPS та прискор систему.",
+download:"⬇ Завантажити",
+how:"Як це працює",
+c1:"⚡ Оп��имізація ПК",
+c2:"🌐 Оптимізація інтернету",
+c3:"🧹 Очищення файлів",
+support:"Підтримати",
+'reviews-title':"Відгуки користувачів",
+'add-review':"💬 Додати відгук",
+'nav-home':"Головна",
+'nav-reviews':"Відгуки",
+'back-home':"← Назад",
+'login-title':"Увійдіть, щоб залишити відгук",
+'google-login':"🔐 Увійти через Google",
+'rating-label':"Оцінка:",
+'opinion-label':"Ваша думка:",
+'submit-btn':"Надіслати відгук",
+'reviews-page-title':"Додати відгук",
+'all-reviews-title':"Усі відгуки",
+'logged-user':"Авторизовано як:"
+},
+es:{
+title:"Optimiza Windows como un profesional",
+desc:"Mejora FPS y acelera tu sistema.",
+download:"⬇ Descargar",
+how:"Cómo funciona",
+c1:"⚡ Optimiza el PC",
+c2:"🌐 Optimiza internet",
+c3:"🧹 Limpia archivos",
+support:"Apóyanos",
+'reviews-title':"Opiniones de usuarios",
+'add-review':"💬 Agregar opinión",
+'nav-home':"Inicio",
+'nav-reviews':"Opiniones",
+'back-home':"← Atrás",
+'login-title':"Inicia sesión para agregar una opinión",
+'google-login':"🔐 Iniciar sesión con Google",
+'rating-label':"Calificación:",
+'opinion-label':"Tu opinión:",
+'submit-btn':"Enviar opinión",
+'reviews-page-title':"Agregar opinión",
+'all-reviews-title':"Todas las opiniones",
+'logged-user':"Autenticado como:"
+}
+};
+
+function changeLang(lang){
+    let t=translations[lang];
+
+    document.getElementById("title").innerText=t.title;
+    document.getElementById("desc").innerText=t.desc;
+    document.getElementById("download-btn").innerText=t.download;
+    document.getElementById("how-title").innerText=t.how;
+    document.getElementById("c1").innerText=t.c1;
+    document.getElementById("c2").innerText=t.c2;
+    document.getElementById("c3").innerText=t.c3;
+    document.getElementById("support-text").innerText=t.support;
+    document.getElementById("reviews-title").innerText=t['reviews-title'];
+    document.getElementById("add-review-btn").innerText=t['add-review'];
+    document.getElementById("nav-home").innerText=t['nav-home'];
+    document.getElementById("nav-reviews").innerText=t['nav-reviews'];
+    document.getElementById("back-home").innerText=t['back-home'];
+    document.getElementById("back-reviews").innerText=t['back-home'];
+    document.getElementById("login-title").innerText=t['login-title'];
+    document.getElementById("google-login-btn").innerText=t['google-login'];
+    document.getElementById("rating-label").innerText=t['rating-label'];
+    document.getElementById("opinion-label").innerText=t['opinion-label'];
+    document.getElementById("submit-btn").innerText=t['submit-btn'];
+    document.getElementById("reviews-page-title").innerText=t['reviews-page-title'];
+    document.getElementById("all-reviews-title").innerText=t['all-reviews-title'];
+}
+
+// INICJALIZACJA
+window.addEventListener('load',()=>{
+    initializeGoogleAuth();
+    loadReviews();
+    
+    // Licznik znaków w opinii
+    document.getElementById('opinion').addEventListener('input',function(){
+        document.getElementById('char-count').innerText=this.value.length+'/500';
+    });
+});
+
+</script>
+
 </body>
 </html>
