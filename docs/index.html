@@ -288,7 +288,7 @@ body{
     font-weight:500;
 }
 
-.download-btn, .back-btn, .review-btn, .delete-btn, .google-btn, .reply-btn{
+.download-btn, .back-btn, .review-btn, .delete-btn, .reply-btn, .auth-btn{
     margin-top:50px;
     padding:20px 50px;
     border-radius:50px;
@@ -304,7 +304,7 @@ body{
     letter-spacing:0.5px;
 }
 
-.download-btn::before, .back-btn::before, .review-btn::before, .delete-btn::before, .google-btn::before, .reply-btn::before{
+.download-btn::before, .back-btn::before, .review-btn::before, .delete-btn::before, .reply-btn::before, .auth-btn::before{
     content:'';
     position:absolute;
     top:0;
@@ -316,17 +316,17 @@ body{
     z-index:-1;
 }
 
-.download-btn:hover::before, .back-btn:hover::before, .review-btn:hover::before, .delete-btn:hover::before, .google-btn:hover::before, .reply-btn:hover::before{
+.download-btn:hover::before, .back-btn:hover::before, .review-btn:hover::before, .delete-btn:hover::before, .reply-btn:hover::before, .auth-btn:hover::before{
     left:0;
 }
 
-.download-btn:hover, .back-btn:hover, .review-btn:hover, .delete-btn:hover, .google-btn:hover, .reply-btn:hover{
+.download-btn:hover, .back-btn:hover, .review-btn:hover, .delete-btn:hover, .reply-btn:hover, .auth-btn:hover{
     border-color:#ec4899;
     box-shadow:0 0 50px rgba(124,58,237,0.6), 0 0 25px rgba(236,72,153,0.4);
     transform:translateY(-5px) scale(1.05);
 }
 
-.download-btn:active, .back-btn:active, .review-btn:active, .delete-btn:active, .google-btn:active, .reply-btn:active{
+.download-btn:active, .back-btn:active, .review-btn:active, .delete-btn:active, .reply-btn:active, .auth-btn:active{
     transform:translateY(-2px) scale(1.02);
 }
 
@@ -572,8 +572,8 @@ body{
     line-height:1.5;
 }
 
-/* REVIEW FORM */
-.review-form-container{
+/* AUTH FORM */
+.auth-form-container{
     max-width:600px;
     margin:40px auto;
     background:rgba(30,30,50,0.4);
@@ -583,7 +583,7 @@ body{
     backdrop-filter:blur(20px);
 }
 
-.review-form-container h3{
+.auth-form-container h3{
     font-size:24px;
     margin-bottom:30px;
     color:#fff;
@@ -624,23 +624,7 @@ body{
     min-height:120px;
 }
 
-.google-btn{
-    width:100%;
-    margin-top:20px;
-    background:white;
-    color:#000;
-    border-color:white;
-}
-
-.google-btn::before{
-    background:linear-gradient(90deg, #f3f4f6, #e5e7eb);
-}
-
-.google-btn:hover{
-    background:rgba(243,244,246,0.9);
-}
-
-.submit-review-btn{
+.submit-btn{
     width:100%;
     margin-top:0;
 }
@@ -648,6 +632,65 @@ body{
 .submit-reply-btn{
     padding:12px 30px;
     margin-top:15px;
+}
+
+.form-toggle{
+    text-align:center;
+    margin-top:20px;
+    color:#cbd5e1;
+}
+
+.form-toggle a{
+    color:#7c3aed;
+    cursor:pointer;
+    text-decoration:underline;
+}
+
+.form-toggle a:hover{
+    color:#ec4899;
+}
+
+.error-msg{
+    background:rgba(239,68,68,0.2);
+    border:1px solid #ef4444;
+    color:#fca5a5;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:15px;
+    display:none;
+}
+
+.success-msg{
+    background:rgba(34,197,94,0.2);
+    border:1px solid #22c55e;
+    color:#86efac;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:15px;
+    display:none;
+}
+
+/* REVIEW FORM */
+.review-form-container{
+    max-width:600px;
+    margin:40px auto;
+    background:rgba(30,30,50,0.4);
+    border:2px solid rgba(124,58,237,0.3);
+    border-radius:20px;
+    padding:40px;
+    backdrop-filter:blur(20px);
+}
+
+.review-form-container h3{
+    font-size:24px;
+    margin-bottom:30px;
+    color:#fff;
+    font-weight:700;
+}
+
+.submit-review-btn{
+    width:100%;
+    margin-top:0;
 }
 
 /* SECTION */
@@ -792,7 +835,7 @@ body{
     display:block;
 }
 
-/* MODAL LOGIN */
+/* MODAL */
 .modal{
     display:none;
     position:fixed;
@@ -825,6 +868,8 @@ body{
     width:90%;
     backdrop-filter:blur(20px);
     text-align:center;
+    max-height:90vh;
+    overflow-y:auto;
 }
 
 .modal-content h2{
@@ -840,11 +885,6 @@ body{
     color:#cbd5e1;
     margin-bottom:30px;
     font-size:16px;
-}
-
-.modal-content .google-btn{
-    margin-top:0;
-    margin-bottom:15px;
 }
 
 .close-modal{
@@ -874,6 +914,7 @@ body{
     .back-btn{display:block;margin-bottom:20px;}
     .review-header{flex-direction:column;align-items:flex-start;}
     .modal-content{padding:30px;}
+    .auth-form-container{padding:30px;}
 }
 
 </style>
@@ -889,18 +930,68 @@ body{
     <div class="orb orb-violet"></div>
 </div>
 
-<!-- LOGIN MODAL -->
-<div id="login-modal" class="modal">
+<!-- AUTH MODAL -->
+<div id="auth-modal" class="modal">
     <div class="modal-content">
-        <span class="close-modal" onclick="closeLoginModal()">&times;</span>
-        <h2 id="modal-title">Zaloguj się</h2>
-        <p id="modal-desc">Musisz się zalogować aby dodać opinię</p>
-        <div id="google-login-container"></div>
-        <p id="or-text" style="margin-top:20px;color:#64748b;">— LUB —</p>
-        <button class="review-btn" onclick="showSimpleLogin()" id="simple-login-btn">📧 Zaloguj się emailem</button>
-        <div id="simple-login-form" style="display:none;margin-top:20px;text-align:left;">
-            <input type="email" id="simple-email" placeholder="Twój email" style="margin-bottom:10px;">
-            <button class="submit-review-btn" onclick="loginWithEmail()">Zaloguj</button>
+        <span class="close-modal" onclick="closeAuthModal()">&times;</span>
+        
+        <!-- LOGIN FORM -->
+        <div id="login-form-section">
+            <h2 id="login-title">Zaloguj się</h2>
+            <p id="login-desc">Zaloguj się aby dodać opinię</p>
+            
+            <div id="login-error" class="error-msg"></div>
+            
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label id="login-email-label">Email:</label>
+                    <input type="email" id="login-email" required placeholder="twoj@email.com">
+                </div>
+                <div class="form-group">
+                    <label id="login-password-label">Hasło:</label>
+                    <input type="password" id="login-password" required placeholder="Minimum 6 znaków">
+                </div>
+                <button type="submit" class="auth-btn" id="login-btn">🔐 Zaloguj się</button>
+            </form>
+            
+            <div class="form-toggle">
+                <span id="no-account-text">Nie masz konta? </span>
+                <a onclick="showRegister()" id="switch-to-register">Zarejestruj się</a>
+            </div>
+        </div>
+
+        <!-- REGISTER FORM -->
+        <div id="register-form-section" style="display:none;">
+            <h2 id="register-title">Zarejestruj się</h2>
+            <p id="register-desc">Utwórz nowe konto aby dodawać opinie</p>
+            
+            <div id="register-error" class="error-msg"></div>
+            <div id="register-success" class="success-msg"></div>
+            
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label id="register-username-label">Nazwa użytkownika:</label>
+                    <input type="text" id="register-username" required placeholder="Twoja nazwa">
+                </div>
+                <div class="form-group">
+                    <label id="register-email-label">Email:</label>
+                    <input type="email" id="register-email" required placeholder="twoj@email.com">
+                </div>
+                <div class="form-group">
+                    <label id="register-password-label">Hasło:</label>
+                    <input type="password" id="register-password" required placeholder="Minimum 6 znaków">
+                </div>
+                <div class="form-group">
+                    <label id="register-confirm-label">Powtórz hasło:</label>
+                    <input type="password" id="register-confirm-password" required placeholder="Powtórz hasło">
+                </div>
+                <button type="submit" class="auth-btn" id="register-btn">✓ Zarejestruj się</button>
+            </form>
+            
+            <div class="form-toggle">
+                <span id="have-account-text">Masz już konto? </span>
+                <a onclick="showLogin()" id="switch-to-login">Zaloguj się</a>
+            </div>
         </div>
     </div>
 </div>
@@ -911,6 +1002,11 @@ body{
     <div class="nav-right">
         <a href="#" onclick="goToHome(); return false;" id="nav-home">Home</a>
         <a href="#" onclick="goToReviews(); return false;" id="nav-reviews">Reviews</a>
+
+        <div id="user-profile" style="display:none;color:#7c3aed;font-weight:700;">
+            <span id="profile-username"></span>
+            <button onclick="logout()" id="logout-btn" style="background:#ef4444;color:white;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;margin-left:15px;">Wyloguj</button>
+        </div>
 
         <div class="lang">
             <select onchange="changeLang(this.value)">
@@ -991,7 +1087,7 @@ body{
 
 <!-- REVIEWS PAGE -->
 <div id="reviews-page" class="page">
-    <div style="min-height:100vh;padding-top:120px;">
+    <div style="min-height:100vh;padding-top:120px;padding-bottom:50px;">
         <button class="back-btn" onclick="goToHome()" id="back-reviews">← Wróć</button>
         
         <h2 id="reviews-page-title" style="font-size:45px;margin-bottom:50px;background:linear-gradient(135deg, #ffffff 0%, #7c3aed 50%, #ec4899 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Dodaj opinię</h2>
@@ -999,8 +1095,8 @@ body{
         <!-- REVIEW FORM (hidden until login) -->
         <div id="review-form-section" class="review-form-container" style="display:none;">
             <div style="margin-bottom:20px;padding:15px;background:rgba(124,58,237,0.2);border-radius:10px;">
-                <p id="logged-user" style="color:#cbd5e1;"></p>
-                <button onclick="logout()" id="logout-btn" style="background:#ef4444;color:white;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;">Wyloguj</button>
+                <p id="logged-user" style="color:#cbd5e1;margin-bottom:10px;"></p>
+                <button onclick="logout()" style="background:#ef4444;color:white;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;">Wyloguj</button>
             </div>
             
             <form onsubmit="submitReview(event)">
@@ -1029,7 +1125,7 @@ body{
         <!-- LOGIN PROMPT -->
         <div id="login-prompt" class="review-form-container">
             <h3 id="login-prompt-title">Zaloguj się aby dodać opinię</h3>
-            <button class="review-btn" onclick="openLoginModal()" id="open-login-btn">🔐 Zaloguj się</button>
+            <button class="review-btn" onclick="openAuthModal()" id="open-login-btn">🔐 Zaloguj się</button>
         </div>
 
         <!-- ALL REVIEWS -->
@@ -1047,12 +1143,11 @@ body{
     </div>
 </div>
 
-<script src="https://accounts.google.com/gsi/client"></script>
-
 <script>
 
 let currentUser=null;
 let userEmail=null;
+let currentLang='pl';
 const ADMIN_EMAIL='clearnixapp@gmail.com';
 
 // STARS EFFECT
@@ -1071,78 +1166,134 @@ function createStars(){
 }
 createStars();
 
-// INIT GOOGLE AUTH
-function initializeGoogleAuth(){
-    try{
-        google.accounts.id.initialize({
-            client_id:'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
-            callback:handleCredentialResponse,
-            auto_select:false
-        });
-        
-        google.accounts.id.renderButton(
-            document.getElementById('google-login-container'),
-            {
-                theme:'outline',
-                size:'large',
-                width:'100%'
-            }
-        );
-    }catch(err){
-        console.log('Google Auth not available');
-    }
+// AUTH FUNCTIONS
+function openAuthModal(){
+    document.getElementById('auth-modal').classList.add('show');
+    showLogin();
 }
 
-function handleCredentialResponse(response){
-    try{
-        const decoded=jwt_decode(response.credential);
-        currentUser=decoded.name;
-        userEmail=decoded.email;
-        showReviewForm();
-        loadReviews();
-        closeLoginModal();
-    }catch(err){
-        alert('Błąd autoryzacji. Spróbuj ponownie.');
-    }
+function closeAuthModal(){
+    document.getElementById('auth-modal').classList.remove('show');
+    document.getElementById('login-error').innerText='';
+    document.getElementById('register-error').innerText='';
+    document.getElementById('login-form-section').style.display='block';
+    document.getElementById('register-form-section').style.display='none';
 }
 
-function jwt_decode(token){
-    const base64Url=token.split('.')[1];
-    const base64=base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload=decodeURIComponent(atob(base64).split('').map(c=>{
-        return '%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    return JSON.parse(jsonPayload);
+function showLogin(){
+    document.getElementById('login-form-section').style.display='block';
+    document.getElementById('register-form-section').style.display='none';
 }
 
-function showSimpleLogin(){
-    document.getElementById('simple-login-form').style.display='block';
-    document.getElementById('simple-login-btn').style.display='none';
+function showRegister(){
+    document.getElementById('login-form-section').style.display='none';
+    document.getElementById('register-form-section').style.display='block';
 }
 
-function loginWithEmail(){
-    const email=document.getElementById('simple-email').value;
-    if(!email) {
-        alert('Podaj email!');
+function handleLogin(e){
+    e.preventDefault();
+    
+    const email=document.getElementById('login-email').value;
+    const password=document.getElementById('login-password').value;
+    const errorDiv=document.getElementById('login-error');
+    
+    if(password.length<6){
+        errorDiv.innerText='Hasło musi mieć minimum 6 znaków!';
+        errorDiv.style.display='block';
         return;
     }
     
-    currentUser=email.split('@')[0];
-    userEmail=email;
+    const users=JSON.parse(localStorage.getItem('users')||'[]');
+    const user=users.find(u=>u.email===email && u.password===password);
+    
+    if(!user){
+        errorDiv.innerText='Email lub hasło niepoprawne!';
+        errorDiv.style.display='block';
+        return;
+    }
+    
+    currentUser=user.username;
+    userEmail=user.email;
+    updateUserProfile();
+    closeAuthModal();
     showReviewForm();
     loadReviews();
-    closeLoginModal();
 }
 
-function openLoginModal(){
-    document.getElementById('login-modal').classList.add('show');
+function handleRegister(e){
+    e.preventDefault();
+    
+    const username=document.getElementById('register-username').value;
+    const email=document.getElementById('register-email').value;
+    const password=document.getElementById('register-password').value;
+    const confirmPassword=document.getElementById('register-confirm-password').value;
+    const errorDiv=document.getElementById('register-error');
+    const successDiv=document.getElementById('register-success');
+    
+    errorDiv.innerText='';
+    errorDiv.style.display='none';
+    successDiv.innerText='';
+    successDiv.style.display='none';
+    
+    if(password.length<6){
+        errorDiv.innerText='Hasło musi mieć minimum 6 znaków!';
+        errorDiv.style.display='block';
+        return;
+    }
+    
+    if(password!==confirmPassword){
+        errorDiv.innerText='Hasła nie pasują do siebie!';
+        errorDiv.style.display='block';
+        return;
+    }
+    
+    const users=JSON.parse(localStorage.getItem('users')||'[]');
+    
+    if(users.some(u=>u.email===email)){
+        errorDiv.innerText='Ten email jest już zarejestrowany!';
+        errorDiv.style.display='block';
+        return;
+    }
+    
+    const newUser={
+        id:Date.now(),
+        username:username,
+        email:email,
+        password:password
+    };
+    
+    users.push(newUser);
+    localStorage.setItem('users',JSON.stringify(users));
+    
+    successDiv.innerText='✓ Konto zostało stworzone! Zaloguj się teraz.';
+    successDiv.style.display='block';
+    
+    setTimeout(()=>{
+        showLogin();
+        document.getElementById('login-email').value=email;
+        document.getElementById('login-password').value='';
+    },1500);
 }
 
-function closeLoginModal(){
-    document.getElementById('login-modal').classList.remove('show');
-    document.getElementById('simple-login-form').style.display='none';
-    document.getElementById('simple-login-btn').style.display='block';
-    document.getElementById('simple-email').value='';
+function updateUserProfile(){
+    if(currentUser && userEmail){
+        document.getElementById('user-profile').style.display='block';
+        document.getElementById('profile-username').innerText=`✓ ${currentUser}`;
+    } else {
+        document.getElementById('user-profile').style.display='none';
+    }
+}
+
+function logout(){
+    currentUser=null;
+    userEmail=null;
+    updateUserProfile();
+    document.getElementById('login-prompt').style.display='block';
+    document.getElementById('review-form-section').style.display='none';
+    document.getElementById('admin-section').classList.remove('show');
+    document.getElementById('rating').value='';
+    document.getElementById('opinion').value='';
+    loadReviews();
 }
 
 function showReviewForm(){
@@ -1150,21 +1301,9 @@ function showReviewForm(){
     document.getElementById('review-form-section').style.display='block';
     document.getElementById('logged-user').innerText=`✓ Zalogowany jako: ${currentUser}`;
     
-    // Jeśli admin, pokaż panel
     if(userEmail===ADMIN_EMAIL){
         document.getElementById('admin-section').classList.add('show');
     }
-}
-
-function logout(){
-    currentUser=null;
-    userEmail=null;
-    document.getElementById('login-prompt').style.display='block';
-    document.getElementById('review-form-section').style.display='none';
-    document.getElementById('admin-section').classList.remove('show');
-    document.getElementById('rating').value='';
-    document.getElementById('opinion').value='';
-    loadReviews();
 }
 
 function submitReview(e){
@@ -1183,7 +1322,6 @@ function submitReview(e){
         return;
     }
     
-    // Sprawdzamy czy użytkownik już pisał opinię
     const reviews=JSON.parse(localStorage.getItem('reviews')||'[]');
     if(reviews.some(r=>r.email===userEmail)){
         alert('Już dodałeś opinię! Każdy użytkownik może dodać max. 1 opinię.');
@@ -1427,7 +1565,7 @@ function goToHome(){
 
 function goToReviews(){
     if(!currentUser){
-        openLoginModal();
+        openAuthModal();
         return;
     }
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -1486,10 +1624,22 @@ support:"Wesprzyj nas",
 'nav-home':"Home",
 'nav-reviews':"Opinie",
 'back-home':"← Wróć",
-'modal-title':"Zaloguj się",
-'modal-desc':"Musisz się zalogować aby dodać opinię",
-'or-text':"— LUB —",
-'simple-login-btn':"📧 Zaloguj się emailem",
+'login-title':"Zaloguj się",
+'login-desc':"Zaloguj się aby dodać opinię",
+'login-email-label':"Email:",
+'login-password-label':"Hasło:",
+'login-btn':"🔐 Zaloguj się",
+'no-account-text':"Nie masz konta?",
+'switch-to-register':"Zarejestruj się",
+'register-title':"Zarejestruj się",
+'register-desc':"Utwórz nowe konto aby dodawać opinie",
+'register-username-label':"Nazwa użytkownika:",
+'register-email-label':"Email:",
+'register-password-label':"Hasło:",
+'register-confirm-label':"Powtórz hasło:",
+'register-btn':"✓ Zarejestruj się",
+'have-account-text':"Masz już konto?",
+'switch-to-login':"Zaloguj się",
 'rating-label':"Ocena:",
 'opinion-label':"Twoja opinia:",
 'submit-btn':"Wyślij opinię",
@@ -1514,10 +1664,22 @@ support:"Support us",
 'nav-home':"Home",
 'nav-reviews':"Reviews",
 'back-home':"← Back",
-'modal-title':"Sign in",
-'modal-desc':"You must sign in to add a review",
-'or-text':"— OR —",
-'simple-login-btn':"📧 Sign in with email",
+'login-title':"Sign in",
+'login-desc':"Sign in to add a review",
+'login-email-label':"Email:",
+'login-password-label':"Password:",
+'login-btn':"🔐 Sign in",
+'no-account-text':"Don't have an account?",
+'switch-to-register':"Sign up",
+'register-title':"Sign up",
+'register-desc':"Create an account to add reviews",
+'register-username-label':"Username:",
+'register-email-label':"Email:",
+'register-password-label':"Password:",
+'register-confirm-label':"Confirm password:",
+'register-btn':"✓ Sign up",
+'have-account-text':"Already have an account?",
+'switch-to-login':"Sign in",
 'rating-label':"Rating:",
 'opinion-label':"Your opinion:",
 'submit-btn':"Submit Review",
@@ -1542,10 +1704,22 @@ support:"Unterstützen Sie uns",
 'nav-home':"Startseite",
 'nav-reviews':"Bewertungen",
 'back-home':"← Zurück",
-'modal-title':"Anmelden",
-'modal-desc':"Sie müssen sich anmelden, um eine Bewertung abzugeben",
-'or-text':"— ODER —",
-'simple-login-btn':"📧 Mit E-Mail anmelden",
+'login-title':"Anmelden",
+'login-desc':"Melden Sie sich an, um eine Bewertung abzugeben",
+'login-email-label':"E-Mail:",
+'login-password-label':"Passwort:",
+'login-btn':"🔐 Anmelden",
+'no-account-text':"Haben Sie kein Konto?",
+'switch-to-register':"Registrieren",
+'register-title':"Registrieren",
+'register-desc':"Erstelle ein Konto, um Bewertungen hinzuzufügen",
+'register-username-label':"Benutzername:",
+'register-email-label':"E-Mail:",
+'register-password-label':"Passwort:",
+'register-confirm-label':"Passwort wiederholen:",
+'register-btn':"✓ Registrieren",
+'have-account-text':"Sie haben bereits ein Konto?",
+'switch-to-login':"Anmelden",
 'rating-label':"Bewertung:",
 'opinion-label':"Deine Meinung:",
 'submit-btn':"Bewertung einreichen",
@@ -1570,10 +1744,22 @@ support:"Поддержать",
 'nav-home':"Главная",
 'nav-reviews':"Отзывы",
 'back-home':"← Назад",
-'modal-title':"Вход",
-'modal-desc':"Вы должны войти, чтобы добавить отзыв",
-'or-text':"— ИЛИ —",
-'simple-login-btn':"📧 Вход по email",
+'login-title':"Вход",
+'login-desc':"Войдите, чтобы добавить отзыв",
+'login-email-label':"Электронная почта:",
+'login-password-label':"Пароль:",
+'login-btn':"🔐 Вход",
+'no-account-text':"Нет аккаунта?",
+'switch-to-register':"Зарегистрируйтесь",
+'register-title':"Регистрация",
+'register-desc':"Создайте аккаунт для добавления отзывов",
+'register-username-label':"Имя пользователя:",
+'register-email-label':"Электронная почта:",
+'register-password-label':"Пароль:",
+'register-confirm-label':"Повторите пароль:",
+'register-btn':"✓ Зарегистрироваться",
+'have-account-text':"Уже есть аккаунт?",
+'switch-to-login':"Вход",
 'rating-label':"Оценка:",
 'opinion-label':"Ваше мнение:",
 'submit-btn':"Отправить отзыв",
@@ -1598,10 +1784,22 @@ support:"Підтримати",
 'nav-home':"Головна",
 'nav-reviews':"Відгуки",
 'back-home':"← Назад",
-'modal-title':"Вхід",
-'modal-desc':"Ви повинні увійти, щоб залишити відгук",
-'or-text':"— АБО —",
-'simple-login-btn':"📧 Вхід через email",
+'login-title':"Вхід",
+'login-desc':"Увійдіть, щоб залишити відгук",
+'login-email-label':"Електронна пошта:",
+'login-password-label':"Пароль:",
+'login-btn':"🔐 Вхід",
+'no-account-text':"Немає облікового запису?",
+'switch-to-register':"Зареєструйтеся",
+'register-title':"Реєстрація",
+'register-desc':"Створіть обліковий запис для додавання відгуків",
+'register-username-label':"Ім'я користувача:",
+'register-email-label':"Електронна пошта:",
+'register-password-label':"Пароль:",
+'register-confirm-label':"Повторіть пароль:",
+'register-btn':"✓ Зареєструйтеся",
+'have-account-text':"Вже є обліковий запис?",
+'switch-to-login':"Вхід",
 'rating-label':"Оцінка:",
 'opinion-label':"Ваша думка:",
 'submit-btn':"Надіслати відгук",
@@ -1626,10 +1824,22 @@ support:"Apóyanos",
 'nav-home':"Inicio",
 'nav-reviews':"Opiniones",
 'back-home':"← Atrás",
-'modal-title':"Iniciar sesión",
-'modal-desc':"Debe iniciar sesión para agregar una opinión",
-'or-text':"— O —",
-'simple-login-btn':"📧 Iniciar sesión con email",
+'login-title':"Iniciar sesión",
+'login-desc':"Inicie sesión para agregar una opinión",
+'login-email-label':"Correo electrónico:",
+'login-password-label':"Contraseña:",
+'login-btn':"🔐 Iniciar sesión",
+'no-account-text':"¿No tienes cuenta?",
+'switch-to-register':"Registrarse",
+'register-title':"Registrarse",
+'register-desc':"Crea una cuenta para agregar opiniones",
+'register-username-label':"Nombre de usuario:",
+'register-email-label':"Correo electrónico:",
+'register-password-label':"Contraseña:",
+'register-confirm-label':"Confirmar contraseña:",
+'register-btn':"✓ Registrarse",
+'have-account-text':"¿Ya tienes cuenta?",
+'switch-to-login':"Iniciar sesión",
 'rating-label':"Calificación:",
 'opinion-label':"Tu opinión:",
 'submit-btn':"Enviar opinión",
@@ -1643,6 +1853,7 @@ support:"Apóyanos",
 };
 
 function changeLang(lang){
+    currentLang=lang;
     let t=translations[lang];
 
     document.getElementById("title").innerText=t.title;
@@ -1659,10 +1870,22 @@ function changeLang(lang){
     document.getElementById("nav-reviews").innerText=t['nav-reviews'];
     document.getElementById("back-home").innerText=t['back-home'];
     document.getElementById("back-reviews").innerText=t['back-home'];
-    document.getElementById("modal-title").innerText=t['modal-title'];
-    document.getElementById("modal-desc").innerText=t['modal-desc'];
-    document.getElementById("or-text").innerText=t['or-text'];
-    document.getElementById("simple-login-btn").innerText=t['simple-login-btn'];
+    document.getElementById("login-title").innerText=t['login-title'];
+    document.getElementById("login-desc").innerText=t['login-desc'];
+    document.getElementById("login-email-label").innerText=t['login-email-label'];
+    document.getElementById("login-password-label").innerText=t['login-password-label'];
+    document.getElementById("login-btn").innerText=t['login-btn'];
+    document.getElementById("no-account-text").innerText=t['no-account-text'];
+    document.getElementById("switch-to-register").innerText=t['switch-to-register'];
+    document.getElementById("register-title").innerText=t['register-title'];
+    document.getElementById("register-desc").innerText=t['register-desc'];
+    document.getElementById("register-username-label").innerText=t['register-username-label'];
+    document.getElementById("register-email-label").innerText=t['register-email-label'];
+    document.getElementById("register-password-label").innerText=t['register-password-label'];
+    document.getElementById("register-confirm-label").innerText=t['register-confirm-label'];
+    document.getElementById("register-btn").innerText=t['register-btn'];
+    document.getElementById("have-account-text").innerText=t['have-account-text'];
+    document.getElementById("switch-to-login").innerText=t['switch-to-login'];
     document.getElementById("rating-label").innerText=t['rating-label'];
     document.getElementById("opinion-label").innerText=t['opinion-label'];
     document.getElementById("submit-btn").innerText=t['submit-btn'];
@@ -1675,8 +1898,8 @@ function changeLang(lang){
 
 // INICJALIZACJA
 window.addEventListener('load',()=>{
-    initializeGoogleAuth();
     loadReviews();
+    updateUserProfile();
     
     // Licznik znaków w opinii
     const opinionField=document.getElementById('opinion');
@@ -1688,9 +1911,9 @@ window.addEventListener('load',()=>{
     
     // Close modal when clicking outside
     window.onclick=function(event){
-        const modal=document.getElementById('login-modal');
+        const modal=document.getElementById('auth-modal');
         if(event.target===modal){
-            closeLoginModal();
+            closeAuthModal();
         }
     }
 });
